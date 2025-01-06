@@ -11,6 +11,10 @@
   --elements-slate: color-mix(in oklab, var(--accent-slate), var(--window-bg-color) var(--color-mix-combination));
 }
 
+.period-label-rotation {
+  transform: rotate(90deg);
+}
+
 .element-card {
   padding: 12px;
 }

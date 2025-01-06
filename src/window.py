@@ -69,6 +69,8 @@ class ElementsWindow(Adw.ApplicationWindow):
             self.periodic_table.attach(
                 child=Gtk.Label(
                     label=number,
+                    margin_bottom=6,
+                    css_classes=['dimmed']
                 ),
                 column=number,
                 row=0,
@@ -80,6 +82,8 @@ class ElementsWindow(Adw.ApplicationWindow):
             self.periodic_table.attach(
                 child=Gtk.Label(
                     label=number,
+                    margin_end=6,
+                    css_classes=['dimmed']
                 ),
                 column=0,
                 row=number,
