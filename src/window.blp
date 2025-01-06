@@ -108,3 +108,48 @@ template $ElementsWindow: Adw.ApplicationWindow {
     };
   };
 }
+
+Box legend {
+    orientation: vertical;
+    spacing: 6;
+
+    styles [
+      "dimmed"
+    ]
+
+    Label {
+      label: _("Atomic Number");
+      halign: start;
+      margin-top: 2;
+    }
+
+    Box {
+      orientation: vertical;
+      valign: center;
+      vexpand: true;
+      halign: start;
+      spacing: 6;
+
+      Label {
+        label: _("Symbol");
+        halign: start;
+        styles [
+          "title-2",
+        ]
+      }
+
+      Label {
+        label: _("Name");
+        halign: start;
+        styles ["caption"]
+      }
+
+      Label {
+        label: _("Atomic Mass");
+        halign: start;
+        styles [
+          "caption"
+        ]
+      }
+    }
+  }

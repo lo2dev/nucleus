@@ -23,6 +23,10 @@
   opacity: 0.2;
 }
 
+.elements-neutral {
+  background: var(--card-bg-color);
+}
+
 .elements-green {
   background: var(--elements-green);
 }

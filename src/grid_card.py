@@ -31,15 +31,11 @@ class ElementsGridCard(Gtk.ToggleButton):
     elem_property = Gtk.Template.Child()
 
 
-    def __init__(self, data, legend=False, **kwargs):
+    def __init__(self, data, **kwargs):
         super().__init__(**kwargs)
 
         self.atomic_number.props.label = str(data['number'])
         self.symbol.props.label = data['symbol']
         self.name.props.label = data['name']
         self.elem_property.props.label = str(data['atomic_mass'])
-
-        if legend:
-            self.symbol.props.css_classes = ["caption", "no-background"]
-            self.atomic_number.props.css_classes = ["caption", "no-background"]
 
