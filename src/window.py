@@ -64,19 +64,28 @@ class ElementsWindow(Adw.ApplicationWindow):
                 height=1
             )
 
-            # if element['xpos'] == 1:
-            #     self.periodic_table.attach_next_to(
-            #         child=Gtk.Button(
-            #             label=element['ypos'],
-            #             halign=Gtk.Align.END,
-            #             margin_end=6,
-                        #css_classes=['card', 'element-card']
-            #         ),
-            #         sibling=card,
-            #         side=Gtk.PositionType.LEFT,
-            #         width=1,
-            #         height=1,
-            #     )
+        #Grid numbers
+        for number in range(1, 19):
+            self.periodic_table.attach(
+                child=Gtk.Label(
+                    label=number,
+                ),
+                column=number,
+                row=0,
+                width=1,
+                height=1
+            )
+
+        for number in range(1, 9):
+            self.periodic_table.attach(
+                child=Gtk.Label(
+                    label=number,
+                ),
+                column=0,
+                row=number,
+                width=1,
+                height=1
+            )
 
         # example_card = ElementsGridCard(
         #     data = {

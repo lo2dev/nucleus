@@ -30,7 +30,6 @@ template $ElementsWindow: Adw.ApplicationWindow {
         [top]
         Adw.HeaderBar {
           show-title: false;
-          // show-end-title-buttons: false;
 
           [start]
           Button close_sidebar_button {
@@ -45,16 +44,7 @@ template $ElementsWindow: Adw.ApplicationWindow {
           }
         }
 
-        content: ScrolledWindow sidebar_scrolled_window {
-          /*Box sidebar_box {
-            spacing: 12;
-            valign: start;
-            orientation: vertical;
-            margin-start: 12;
-            margin-end: 12;
-            margin-bottom: 12;
-          }*/
-        };
+        content: ScrolledWindow sidebar_scrolled_window {};
       };
     };
 
@@ -76,30 +66,12 @@ template $ElementsWindow: Adw.ApplicationWindow {
         content: ScrolledWindow {
           propagate-natural-width: true;
 
-          // Box {
-          //   orientation: vertical;
-          //   spacing: 6;
-
-          //   Grid table_counter_horizontal {
-
-          //   }
-
-          //   Box {
-          //     spacing: 6;
-          //     Grid table_counter_vertical {
-
-          //     }
-          //   }
-          // }
-
           Grid periodic_table {
             column-homogeneous: true;
             row-homogeneous: true;
             column-spacing: 6;
             row-spacing: 6;
-            margin-start: 12;
             margin-end: 24;
-            margin-top: 12;
             margin-bottom: 24;
 
             valign: center;
