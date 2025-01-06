@@ -1,0 +1,49 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $ElementsGridCard : Gtk.ToggleButton {
+  hexpand: false;
+  vexpand: false;
+  // width-request: 100;
+  // height-request: 100;
+
+  child: Box {
+    orientation: vertical;
+    spacing: 6;
+
+    Box {
+      Label atomic_number {
+        halign: start;
+
+        styles [
+          "dimmed"
+        ]
+      }
+    }
+
+    Box {
+      orientation: vertical;
+      valign: center;
+      vexpand: true;
+      halign: center;
+      spacing: 6;
+
+      Label symbol {
+        styles [
+          "title-2",
+          "heading"
+        ]
+      }
+
+      Label name {
+        styles ["caption"]
+      }
+
+      Label elem_property {
+        styles [
+          "caption"
+        ]
+      }
+    }
+  };
+}

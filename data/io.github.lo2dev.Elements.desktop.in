@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=elements
+Exec=elements
+Icon=io.github.lo2dev.Elements
+Terminal=false
+Type=Application
+Categories=Utility;
+Keywords=GTK;
+StartupNotify=true
+DBusActivatable=true

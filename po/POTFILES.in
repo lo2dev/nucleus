@@ -1,0 +1,8 @@
+# List of source files containing translatable strings.
+# Please keep this file sorted alphabetically.
+data/io.github.lo2dev.Elements.desktop.in
+data/io.github.lo2dev.Elements.metainfo.xml.in
+data/io.github.lo2dev.Elements.gschema.xml
+src/main.py
+src/window.py
+src/window.blp

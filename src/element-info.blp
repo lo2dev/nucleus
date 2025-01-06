@@ -1,0 +1,64 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $ElementsElementInfo : Gtk.Box {
+  orientation: vertical;
+  spacing: 12;
+  valign: start;
+  margin-start: 12;
+  margin-end: 12;
+  margin-bottom: 12;
+
+  Box element_card {
+    width-request: 140;
+    height-request: 160;
+    margin-top: 12;
+    margin-bottom: 24;
+    orientation: vertical;
+    halign: center;
+    spacing: 6;
+
+    styles [
+      "card",
+      "element-card"
+    ]
+
+    Label atomic_number {
+      halign: start;
+      tooltip-text: _("Atomic Number");
+
+      styles [
+        "heading"
+      ]
+    }
+
+    Box {
+      orientation: vertical;
+      spacing: 6;
+      valign: center;
+      vexpand: true;
+      halign: center;
+
+      Label element_symbol {
+        styles [
+          "title-1"
+        ]
+      }
+
+      Label element_name {
+        selectable: true;
+      }
+
+      Label element_property {
+        wrap: true;
+        wrap-mode: word_char;
+        justify: center;
+        selectable: true;
+
+        styles [
+          "dim-label"
+        ]
+      }
+    }
+  }
+}

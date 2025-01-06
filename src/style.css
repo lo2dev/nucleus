@@ -1,0 +1,101 @@
+:root {
+  --color-mix-combination: 60%;
+  --elements-green: color-mix(in oklab, var(--accent-green), var(--window-bg-color) var(--color-mix-combination));
+  --elements-red: color-mix(in oklab, var(--accent-red), var(--window-bg-color) var(--color-mix-combination));
+  --elements-blue: color-mix(in oklab, var(--accent-blue), var(--window-bg-color) var(--color-mix-combination));
+  --elements-orange: color-mix(in oklab, var(--accent-orange), var(--window-bg-color) var(--color-mix-combination));
+  --elements-purple: color-mix(in oklab, var(--accent-purple), var(--window-bg-color) var(--color-mix-combination));
+  --elements-pink: color-mix(in oklab, var(--accent-pink), var(--window-bg-color) var(--color-mix-combination));
+  --elements-yellow: color-mix(in oklab, var(--accent-yellow), var(--window-bg-color) var(--color-mix-combination));
+  --elements-teal: color-mix(in oklab, var(--accent-teal), var(--window-bg-color) var(--color-mix-combination));
+  --elements-slate: color-mix(in oklab, var(--accent-slate), var(--window-bg-color) var(--color-mix-combination));
+}
+
+.element-card {
+  padding: 12px;
+}
+
+.element-card-inactive {
+  opacity: 0.2;
+}
+
+.elements-green {
+  background: var(--elements-green);
+}
+
+.elements-red {
+  background: var(--elements-red);
+}
+
+.elements-blue {
+  background: var(--elements-blue);
+}
+
+.elements-orange {
+  background: var(--elements-orange);
+}
+
+.elements-purple {
+  background: var(--elements-purple);
+}
+
+.elements-teal {
+  background: var(--elements-teal);
+}
+
+.elements-yellow {
+  background: var(--elements-yellow);
+}
+
+.elements-slate {
+  background: var(--elements-slate);
+}
+
+.elements-pink {
+  background: var(--elements-pink);
+}
+
+
+
+.suggested-action {
+  color: currentColor;
+}
+
+.suggested-action.green {
+  --accent-bg-color: var(--elements-green);
+}
+
+.suggested-action.red {
+  --accent-bg-color: var(--elements-red);
+}
+
+.suggested-action.blue {
+  --accent-bg-color: var(--elements-blue);
+}
+
+.suggested-action.orange {
+  --accent-bg-color: var(--elements-orange);
+}
+
+.suggested-action.purple {
+  --accent-bg-color: var(--elements-purple);
+}
+
+.suggested-action.yellow {
+  --accent-bg-color: var(--elements-yellow);
+}
+
+.suggested-action.teal {
+  --accent-bg-color: var(--elements-teal);
+}
+
+.suggested-action.slate {
+  --accent-bg-color: var(--elements-slate);
+}
+
+.suggested-action.pink {
+  --accent-bg-color: var(--elements-pink);
+}
+
+
+

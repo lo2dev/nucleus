@@ -1,0 +1,112 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $ElementsWindow: Adw.ApplicationWindow {
+  title: _('Elements');
+  default-width: 1500;
+  default-height: 980;
+
+  /*Adw.Breakpoint {
+    condition ("max-width: 600sp")
+
+    setters {
+      split_view.collapsed: true;
+      split_view.show-sidebar: true;
+    }
+  }*/
+
+  content: Adw.OverlaySplitView split_view {
+    sidebar-position: end;
+    sidebar-width-fraction: 0.35;
+    show-sidebar: false;
+    max-sidebar-width: 400;
+    enable-show-gesture: false;
+
+    sidebar: Adw.NavigationPage {
+      title: _("Element");
+      tag: "sidebar";
+
+      child: Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {
+          show-title: false;
+          // show-end-title-buttons: false;
+
+          [start]
+          Button close_sidebar_button {
+            icon-name: "sidebar-show-right-symbolic";
+            tooltip-text: _("Close Sidebar");
+          }
+
+          [end]
+          Button source_button {
+            icon-name: "external-link-symbolic";
+            tooltip-text: "Wikipedia";
+          }
+        }
+
+        content: ScrolledWindow sidebar_scrolled_window {
+          /*Box sidebar_box {
+            spacing: 12;
+            valign: start;
+            orientation: vertical;
+            margin-start: 12;
+            margin-end: 12;
+            margin-bottom: 12;
+          }*/
+        };
+      };
+    };
+
+    content: Adw.NavigationPage {
+      title: bind template.title;
+      tag: "content";
+
+      child: Adw.ToolbarView {
+        [top]
+        Adw.HeaderBar {
+          [end]
+          Button {
+            icon-name: "info-outline-symbolic";
+            tooltip-text: _("About Elements");
+            action-name: "app.about";
+          }
+        }
+
+        content: ScrolledWindow {
+          propagate-natural-width: true;
+
+          // Box {
+          //   orientation: vertical;
+          //   spacing: 6;
+
+          //   Grid table_counter_horizontal {
+
+          //   }
+
+          //   Box {
+          //     spacing: 6;
+          //     Grid table_counter_vertical {
+
+          //     }
+          //   }
+          // }
+
+          Grid periodic_table {
+            column-homogeneous: true;
+            row-homogeneous: true;
+            column-spacing: 6;
+            row-spacing: 6;
+            margin-start: 12;
+            margin-end: 24;
+            margin-top: 12;
+            margin-bottom: 24;
+
+            valign: center;
+            halign: center;
+          }
+        };
+      };
+    };
+  };
+}
