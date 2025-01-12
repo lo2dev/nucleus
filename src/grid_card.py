@@ -37,5 +37,7 @@ class ElementsGridCard(Gtk.ToggleButton):
         self.atomic_number.props.label = str(data['number'])
         self.symbol.props.label = data['symbol']
         self.name.props.label = data['name']
-        self.elem_property.props.label = str(data['atomic_mass'])
+
+        atomic_mass = f"{data['atomic_mass']:.3f}"
+        self.elem_property.props.label = atomic_mass.rstrip('0').rstrip('.')
 
