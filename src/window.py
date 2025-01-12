@@ -56,13 +56,6 @@ class ElementsWindow(Adw.ApplicationWindow):
             get_category_color(card, element['category'])
             card.connect("clicked", self.on_grid_card_clicked, element)
 
-            if element['number'] == 1:
-                example_card = ElementsGridCard(
-                    element,
-                    css_classes=['elements-neutral']
-                )
-                self.periodic_table.attach(example_card, 7, 2, width=1, height=1)
-
             self.periodic_table.attach(
                 card,
                 element['xpos'],
@@ -98,7 +91,7 @@ class ElementsWindow(Adw.ApplicationWindow):
                 height=1
             )
 
-        self.periodic_table.attach(self.legend, 8, 2, width=2, height=1)
+        self.periodic_table.attach(self.legend, column=2, row=1, width=2, height=1)
         #self.split_view.connect("notify::show-sidebar", self.on_show_sidebar_changed)
         self.source_button.connect(
             "clicked",
