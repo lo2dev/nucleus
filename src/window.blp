@@ -69,15 +69,16 @@ template $ElementsWindow: Adw.ApplicationWindow {
           Box {
             orientation: vertical;
             spacing: 12;
-            margin-start: 24;
-            margin-end: 24;
-            margin-top: 24;
-            margin-bottom: 24;
+            margin-start: 14;
+            margin-end: 14;
+            margin-top: 14;
+            margin-bottom: 14;
             valign: center;
             halign: center;
 
             Label {
               label: _("Group");
+              visible: false;
 
               styles [
                 "heading",
@@ -87,8 +88,10 @@ template $ElementsWindow: Adw.ApplicationWindow {
 
             Box {
               spacing: 6;
+
               Label {
                 label: _("Period");
+                visible: false;
 
                 styles [
                   "heading",
