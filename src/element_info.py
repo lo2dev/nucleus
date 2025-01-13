@@ -49,6 +49,11 @@ class ElementsElementInfo(Gtk.Box):
                 'atomic_mass',
                 'summary',
             ],
+            '': [
+                'group',
+                'period',
+                'block'
+            ],
             'Physical Properties': [
                 'phase',
                 'density',
