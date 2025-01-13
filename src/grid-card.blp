@@ -4,8 +4,8 @@ using Adw 1;
 template $ElementsGridCard : Gtk.ToggleButton {
   hexpand: false;
   vexpand: false;
-  width-request: 105;
-  height-request: 105;
+  width-request: 80;
+  height-request: 80;
 
   child: Box {
     orientation: vertical;
@@ -33,10 +33,6 @@ template $ElementsGridCard : Gtk.ToggleButton {
           "title-2",
           "heading"
         ]
-      }
-
-      Label name {
-        styles ["caption"]
       }
 
       Label elem_property {
