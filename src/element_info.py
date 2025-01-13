@@ -46,6 +46,7 @@ class ElementsElementInfo(Gtk.Box):
 
         properties = {
             'General Properties': [
+                'appearance',
                 'atomic_mass',
                 'summary',
             ],
@@ -62,7 +63,6 @@ class ElementsElementInfo(Gtk.Box):
                 'molar_heat'
             ],
             'Other Properties': [
-                'appearance',
                 'discovered_by',
                 'named_by',
 
@@ -87,6 +87,8 @@ class ElementsElementInfo(Gtk.Box):
                         row.add_suffix(Gtk.Image(icon_name="weight-symbolic"))
                     elif data[property] == "Liquid":
                         row.add_suffix(Gtk.Image(icon_name="liquid-symbolic"))
+                elif property == 'appearance':
+                    row.props.subtitle = row.props.subtitle.title()
                 elif property == 'atomic_mass':
                     row.props.subtitle = f"{data[property]} u"
 
