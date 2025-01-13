@@ -78,6 +78,7 @@ class ElementsElementInfo(Gtk.Box):
                     subtitle=data[property] if data[property] else "-",
                     subtitle_selectable=True,
                     css_classes=['property'],
+                    use_markup=True
                 )
 
                 if property == 'phase':
@@ -89,6 +90,11 @@ class ElementsElementInfo(Gtk.Box):
                         row.add_suffix(Gtk.Image(icon_name="liquid-symbolic"))
                 elif property == 'appearance':
                     row.props.subtitle = row.props.subtitle.title()
+                elif property == 'density':
+                    row.props.subtitle = f"{data[property]} g/cm<sup>3</sup>"
+                elif property == 'melt' or property == 'boil':
+                    converted_value = float(row.props.subtitle) - 273.15
+                    row.props.subtitle = f"{converted_value:.2f} °C = {row.props.subtitle} K"
                 elif property == 'atomic_mass':
                     row.props.subtitle = f"{data[property]} u"
 
