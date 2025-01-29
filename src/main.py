@@ -24,14 +24,14 @@ gi.require_version('Gtk', '4.0')
 gi.require_version('Adw', '1')
 
 from gi.repository import Gtk, Gio, Adw
-from .window import ElementsWindow
+from .window import NucleusWindow
 
 
-class ElementsApplication(Adw.Application):
+class NucleusApplication(Adw.Application):
     """The main application singleton class."""
 
     def __init__(self):
-        super().__init__(application_id='io.github.lo2dev.Elements',
+        super().__init__(application_id='io.github.lo2dev.Nucleus',
                          flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
         self.create_action('quit', lambda *_: self.quit(), ['<primary>q'])
         self.create_action('about', self.on_about_action)
@@ -45,14 +45,14 @@ class ElementsApplication(Adw.Application):
         """
         win = self.props.active_window
         if not win:
-            win = ElementsWindow(application=self)
+            win = NucleusWindow(application=self)
         win.present()
 
 
     def on_about_action(self, *args):
         """Callback for the app.about action."""
-        about = Adw.AboutDialog(application_name='Elements',
-                                application_icon='io.github.lo2dev.Elements',
+        about = Adw.AboutDialog(application_name='Nucleus',
+                                application_icon='io.github.lo2dev.Nucleus',
                                 developer_name='Lo',
                                 version='Unobtanium',
                                 developers=['Lo'],
@@ -80,6 +80,6 @@ class ElementsApplication(Adw.Application):
 
 def main(version):
     """The application's entry point."""
-    app = ElementsApplication()
+    app = NucleusApplication()
     return app.run(sys.argv)
     

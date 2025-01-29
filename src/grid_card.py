@@ -21,9 +21,9 @@ import gi, json
 from gi.repository import Gtk
 
 
-@Gtk.Template(resource_path="/io/github/lo2dev/Elements/grid-card.ui")
-class ElementsGridCard(Gtk.ToggleButton):
-    __gtype_name__ = "ElementsGridCard"
+@Gtk.Template(resource_path="/io/github/lo2dev/Nucleus/grid-card.ui")
+class NucleusGridCard(Gtk.ToggleButton):
+    __gtype_name__ = "NucleusGridCard"
 
     atomic_number = Gtk.Template.Child()
     symbol = Gtk.Template.Child()

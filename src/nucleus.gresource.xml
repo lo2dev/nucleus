@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gresources>
-  <gresource prefix="/io/github/lo2dev/Elements">
+  <gresource prefix="/io/github/lo2dev/Nucleus">
     <file preprocess="xml-stripblanks">window.ui</file>
     <file preprocess="xml-stripblanks">grid-card.ui</file>
     <file preprocess="xml-stripblanks">element-info.ui</file>
@@ -9,7 +9,7 @@
     <file>style.css</file>
   </gresource>
 
-  <gresource prefix="/io/github/lo2dev/Elements/icons/scalable/actions/">
+  <gresource prefix="/io/github/lo2dev/Nucleus/icons/scalable/actions/">
     <file preprocess="xml-stripblanks" alias="info-outline-symbolic.svg">../data/icons/scalable/actions/info-outline-symbolic.svg</file>
     <file preprocess="xml-stripblanks" alias="liquid-symbolic.svg">../data/icons/scalable/actions/blur-symbolic.svg</file>
     <file preprocess="xml-stripblanks" alias="gas-symbolic.svg">../data/icons/scalable/actions/cloud-filled-symbolic.svg</file>

@@ -1,1 +1,1 @@
-i18n.gettext('elements', preset: 'glib')
+i18n.gettext('nucleus', preset: 'glib')

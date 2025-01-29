@@ -21,14 +21,14 @@ import gi, json
 from gi.repository import Adw, Gtk, Gio
 
 
-from .grid_card import ElementsGridCard
-from .element_info import ElementsElementInfo
+from .grid_card import NucleusGridCard
+from .element_info import NucleusElementInfo
 from .utils import get_category_color
 
 
-@Gtk.Template(resource_path="/io/github/lo2dev/Elements/window.ui")
-class ElementsWindow(Adw.ApplicationWindow):
-    __gtype_name__ = "ElementsWindow"
+@Gtk.Template(resource_path="/io/github/lo2dev/Nucleus/window.ui")
+class NucleusWindow(Adw.ApplicationWindow):
+    __gtype_name__ = "NucleusWindow"
 
     periodic_table = Gtk.Template.Child()
     split_view = Gtk.Template.Child()
@@ -44,7 +44,7 @@ class ElementsWindow(Adw.ApplicationWindow):
         super().__init__(**kwargs)
 
         data_file = Gio.resources_lookup_data(
-            "/io/github/lo2dev/Elements/PeriodicTableJSON.json",
+            "/io/github/lo2dev/Nucleus/PeriodicTableJSON.json",
             Gio.ResourceLookupFlags.NONE,
         )
 
@@ -52,7 +52,7 @@ class ElementsWindow(Adw.ApplicationWindow):
         json_file = json.loads(decoded_text)
 
         for element in json_file["elements"]:
-            card = ElementsGridCard(element)
+            card = NucleusGridCard(element)
             get_category_color(card, element['category'])
             card.connect("clicked", self.on_grid_card_clicked, element)
 
@@ -140,6 +140,6 @@ class ElementsWindow(Adw.ApplicationWindow):
 
     def load_chem_info(self, data) -> None:
         self.element_source_link = data['source']
-        info = ElementsElementInfo(data)
+        info = NucleusElementInfo(data)
         self.sidebar_scrolled_window.props.child = info
 

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="nucleus">
+	<schema id="io.github.lo2dev.Nucleus" path="/io/github/lo2dev/Nucleus/">
+	</schema>
+</schemalist>

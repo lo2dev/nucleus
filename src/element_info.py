@@ -23,9 +23,9 @@ from gi.repository import Adw, Gtk, Gio
 from .utils import get_category_color
 
 
-@Gtk.Template(resource_path="/io/github/lo2dev/Elements/element-info.ui")
-class ElementsElementInfo(Gtk.Box):
-    __gtype_name__ = "ElementsElementInfo"
+@Gtk.Template(resource_path="/io/github/lo2dev/Nucleus/element-info.ui")
+class NucleusElementInfo(Gtk.Box):
+    __gtype_name__ = "NucleusElementInfo"
 
     element_card = Gtk.Template.Child()
 

@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=elements
-Exec=elements
-Icon=io.github.lo2dev.Elements
+Name=nucleus
+Exec=nucleus
+Icon=io.github.lo2dev.Nucleus
 Terminal=false
 Type=Application
 Categories=Utility;

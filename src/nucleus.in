@@ -1,6 +1,6 @@
 #!@PYTHON@
 
-# elements.in
+# nucleus.in
 #
 # Copyright 2024 Lo
 #
@@ -31,16 +31,16 @@ localedir = '@localedir@'
 
 sys.path.insert(1, pkgdatadir)
 signal.signal(signal.SIGINT, signal.SIG_DFL)
-locale.bindtextdomain('elements', localedir)
-locale.textdomain('elements')
-gettext.install('elements', localedir)
+locale.bindtextdomain('nucleus', localedir)
+locale.textdomain('nucleus')
+gettext.install('nucleus', localedir)
 
 if __name__ == '__main__':
     import gi
 
     from gi.repository import Gio
-    resource = Gio.Resource.load(os.path.join(pkgdatadir, 'elements.gresource'))
+    resource = Gio.Resource.load(os.path.join(pkgdatadir, 'nucleus.gresource'))
     resource._register()
 
-    from elements import main
+    from nucleus import main
     sys.exit(main.main(VERSION))

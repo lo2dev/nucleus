@@ -1,4 +1,4 @@
-application_id = 'io.github.lo2dev.Elements'
+application_id = 'io.github.lo2dev.Nucleus'
 
 scalable_dir = 'hicolor' / 'scalable' / 'apps'
 install_data(

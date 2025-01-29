@@ -1,5 +1,5 @@
 pkgdatadir = get_option('prefix') / get_option('datadir') / meson.project_name()
-moduledir = pkgdatadir / 'elements'
+moduledir = pkgdatadir / 'nucleus'
 gnome = import('gnome')
 
 blueprints = custom_target('blueprints',
@@ -13,8 +13,8 @@ blueprints = custom_target('blueprints',
   command: [find_program('blueprint-compiler'), 'batch-compile', '@OUTPUT@', '@CURRENT_SOURCE_DIR@', '@INPUT@'],
 )
 
-gnome.compile_resources('elements',
-  'elements.gresource.xml',
+gnome.compile_resources('nucleus',
+  'nucleus.gresource.xml',
   gresource_bundle: true,
   install: true,
   install_dir: pkgdatadir,
@@ -30,15 +30,15 @@ conf.set('localedir', get_option('prefix') / get_option('localedir'))
 conf.set('pkgdatadir', pkgdatadir)
 
 configure_file(
-  input: 'elements.in',
-  output: 'elements',
+  input: 'nucleus.in',
+  output: 'nucleus',
   configuration: conf,
   install: true,
   install_dir: get_option('bindir'),
   install_mode: 'r-xr-xr-x'
 )
 
-elements_sources = [
+nucleus_sources = [
   '__init__.py',
   'main.py',
   'window.py',
@@ -47,4 +47,4 @@ elements_sources = [
   'utils.py',
 ]
 
-install_data(elements_sources, install_dir: moduledir)
+install_data(nucleus_sources, install_dir: moduledir)

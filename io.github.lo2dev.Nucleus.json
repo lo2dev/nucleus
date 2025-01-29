@@ -1,9 +1,9 @@
 {
-    "id" : "io.github.lo2dev.Elements",
+    "id" : "io.github.lo2dev.Nucleus",
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "master",
     "sdk" : "org.gnome.Sdk",
-    "command" : "elements",
+    "command" : "nucleus",
     "finish-args" : [
         "--share=ipc",
         "--socket=fallback-x11",
@@ -23,7 +23,7 @@
     ],
     "modules" : [
         {
-            "name" : "elements",
+            "name" : "nucleus",
             "builddir" : true,
             "buildsystem" : "meson",
             "sources" : [
