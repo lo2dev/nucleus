@@ -6,50 +6,60 @@ template $NucleusWindow: Adw.ApplicationWindow {
   default-width: 1500;
   default-height: 980;
 
-  /*Adw.Breakpoint {
-    condition ("max-width: 600sp")
+  Adw.Breakpoint narrow_breakpoint {
+    condition ("max-width: 600px")
 
     setters {
-      split_view.collapsed: true;
-      split_view.show-sidebar: true;
+      multi_layout_view.layout-name: "narrow";
+      element_view_header.show-end-title-buttons: false;
+      close_sidebar_button.visible: false;
     }
-  }*/
+  }
 
-  content: Adw.OverlaySplitView split_view {
-    sidebar-position: end;
-    sidebar-width-fraction: 0.35;
-    show-sidebar: false;
-    max-sidebar-width: 400;
-    min-sidebar-width: 270;
-    enable-show-gesture: false;
+  Adw.MultiLayoutView multi_layout_view {
+    Adw.Layout {
+      name: "wide";
 
-    sidebar: Adw.NavigationPage {
-      title: _("Element");
-      tag: "sidebar";
+      content: Adw.OverlaySplitView split_view {
+        sidebar-position: end;
+        sidebar-width-fraction: 0.35;
+        show-sidebar: false;
+        max-sidebar-width: 400;
+        min-sidebar-width: 270;
+        enable-show-gesture: false;
+        enable-hide-gesture: false;
 
-      child: Adw.ToolbarView {
-        [top]
-        Adw.HeaderBar {
-          show-title: false;
+        content: Adw.LayoutSlot {
+          id: "main_view";
+        };
 
-          [start]
-          Button close_sidebar_button {
-            icon-name: "sidebar-show-right-symbolic";
-            tooltip-text: _("Close Sidebar");
-          }
+        sidebar: Adw.NavigationPage {
+          title: _("Element");
+          tag: "sidebar";
 
-          [end]
-          Button source_button {
-            icon-name: "external-link-symbolic";
-            tooltip-text: "Wikipedia";
-          }
-        }
-
-        content: ScrolledWindow sidebar_scrolled_window {};
+          child: Adw.LayoutSlot {
+            id: "element_view";
+          };
+        };
       };
-    };
+    }
 
-    content: Adw.NavigationPage {
+    Adw.Layout {
+      name: "narrow";
+
+      content: Adw.BottomSheet bottom_sheet {
+        content: Adw.LayoutSlot {
+          id: "main_view";
+        };
+
+        sheet: Adw.LayoutSlot {
+          id: "element_view";
+        };
+      };
+    }
+
+    [main_view]
+    Adw.NavigationPage {
       title: bind template.title;
       tag: "content";
 
@@ -109,8 +119,32 @@ template $NucleusWindow: Adw.ApplicationWindow {
           }
         };
       };
-    };
-  };
+    }
+
+    [element_view]
+    Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar element_view_header {
+        show-title: false;
+
+        [start]
+        Button close_sidebar_button {
+          icon-name: "sidebar-show-right-symbolic";
+          tooltip-text: _("Close Sidebar");
+        }
+
+        [end]
+        Button source_button {
+          icon-name: "external-link-symbolic";
+          tooltip-text: "Wikipedia";
+        }
+      }
+
+      content: ScrolledWindow sidebar_scrolled_window {
+        propagate-natural-height: true;
+      };
+    }
+  }
 }
 
 Box legend {

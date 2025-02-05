@@ -30,6 +30,7 @@ from .utils import get_category_color
 class NucleusWindow(Adw.ApplicationWindow):
     __gtype_name__ = "NucleusWindow"
 
+    bottom_sheet = Gtk.Template.Child()
     periodic_table = Gtk.Template.Child()
     split_view = Gtk.Template.Child()
     sidebar_scrolled_window = Gtk.Template.Child()
@@ -93,6 +94,9 @@ class NucleusWindow(Adw.ApplicationWindow):
 
         self.periodic_table.attach(self.legend, column=2, row=1, width=2, height=1)
         #self.split_view.connect("notify::show-sidebar", self.on_show_sidebar_changed)
+
+        self.bottom_sheet.connect("notify::open", self.on_bottom_sheet_open_changed)
+
         self.source_button.connect(
             "clicked",
             lambda _: Gtk.UriLauncher(uri=self.element_source_link).launch(
@@ -104,6 +108,12 @@ class NucleusWindow(Adw.ApplicationWindow):
     def on_close_sidebar(self, _clicked_button, last_selected_element) -> None:
         last_selected_element.props.active = False
         self.split_view.props.show_sidebar = False
+        self.bottom_sheet.props.open = False
+
+
+    def on_bottom_sheet_open_changed(self, x, y):
+        if self.bottom_sheet.props.open == False:
+            self.on_close_sidebar(None, self.last_selected_element)
 
 
     def on_show_sidebar_changed(self, split_view, is_open):
@@ -114,6 +124,8 @@ class NucleusWindow(Adw.ApplicationWindow):
     def on_grid_card_clicked(self, button, element_data):
         if self.last_selected_element == None:
             self.last_selected_element = button
+
+        self.bottom_sheet.props.open = True
 
         if button != self.last_selected_element:
             self.last_selected_element.props.active = False
