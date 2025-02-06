@@ -11,7 +11,6 @@ template $NucleusWindow: Adw.ApplicationWindow {
 
     setters {
       multi_layout_view.layout-name: "narrow";
-      element_view_header.show-end-title-buttons: false;
       close_sidebar_button.visible: false;
     }
   }
@@ -48,6 +47,8 @@ template $NucleusWindow: Adw.ApplicationWindow {
       name: "narrow";
 
       content: Adw.BottomSheet bottom_sheet {
+        show-drag-handle: false;
+
         content: Adw.LayoutSlot {
           id: "main_view";
         };
