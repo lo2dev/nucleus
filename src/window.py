@@ -93,7 +93,6 @@ class NucleusWindow(Adw.ApplicationWindow):
             )
 
         self.periodic_table.attach(self.legend, column=2, row=1, width=2, height=1)
-        #self.split_view.connect("notify::show-sidebar", self.on_show_sidebar_changed)
 
         self.bottom_sheet.connect("notify::open", self.on_bottom_sheet_open_changed)
 
@@ -114,11 +113,6 @@ class NucleusWindow(Adw.ApplicationWindow):
     def on_bottom_sheet_open_changed(self, x, y):
         if self.bottom_sheet.props.open == False:
             self.on_close_sidebar(None, self.last_selected_element)
-
-
-    def on_show_sidebar_changed(self, split_view, is_open):
-        if split_view.props.show_sidebar == False:
-            self.last_selected_element.props.active = False
 
 
     def on_grid_card_clicked(self, button, element_data):
