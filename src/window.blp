@@ -60,13 +60,18 @@ template $NucleusWindow: Adw.ApplicationWindow {
     }
 
     [main_view]
-    Adw.NavigationPage {
+    Adw.NavigationPage content_view {
       title: bind template.title;
       tag: "content";
 
       child: Adw.ToolbarView {
         [top]
         Adw.HeaderBar {
+          [start]
+          ToggleButton search_button {
+            icon-name: "loupe-large-symbolic";
+          }
+
           [end]
           Button {
             icon-name: "info-outline-symbolic";
@@ -75,48 +80,78 @@ template $NucleusWindow: Adw.ApplicationWindow {
           }
         }
 
-        content: ScrolledWindow {
-          propagate-natural-width: true;
+        [top]
+        SearchBar searchbar {
+          key-capture-widget: content_view;
+          search-mode-enabled: bind search_button.active bidirectional;
 
-          Box {
-            orientation: vertical;
-            spacing: 12;
-            margin-start: 14;
-            margin-end: 14;
-            margin-top: 14;
-            margin-bottom: 14;
-            valign: center;
-            halign: center;
+          child: Adw.Clamp {
+            maximum-size: 400;
 
-            Label {
-              label: _("Group");
-              visible: false;
+            SearchEntry search_entry {
+              placeholder-text: _("Search elements");
+              hexpand: true;
 
               styles [
-                "heading",
-                "dimmed"
+                "big-search"
               ]
             }
+          };
+        }
 
-            Box {
-              spacing: 6;
+        content: Stack stack {
+          hhomogeneous: false;
+          vhomogeneous: false;
+          transition-type: crossfade;
 
-              Label {
-                label: _("Period");
-                visible: false;
+          StackPage {
+            name: "table-view";
 
-                styles [
-                  "heading",
-                  "dimmed",
-                  "period-label-rotation"
-                ]
+            child: ScrolledWindow {
+              propagate-natural-width: true;
+
+              Box {
+                orientation: vertical;
+                spacing: 12;
+                margin-start: 14;
+                margin-end: 14;
+                margin-top: 14;
+                margin-bottom: 14;
+                valign: center;
+                halign: center;
+
+                Grid periodic_table {
+                  column-spacing: 6;
+                  row-spacing: 6;
+                }
               }
+            };
+          }
 
-              Grid periodic_table {
-                column-spacing: 6;
-                row-spacing: 6;
+          StackPage {
+            name: "search-view";
+            visible: bind search_button.active;
+
+            child: ScrolledWindow {
+              propagate-natural-height: true;
+
+              Adw.Clamp {
+                valign: start;
+                margin-top: 12;
+                margin-bottom: 12;
+                margin-start: 12;
+                margin-end: 12;
+
+                ListBox search_listbox {
+
+                  selection-mode: none;
+
+                  styles [
+                    "boxed-list"
+                  ]
+                }
               }
-            }
+            };
           }
         };
       };

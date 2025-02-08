@@ -18,6 +18,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 import gi, json
+import re as regex
 from gi.repository import Adw, Gtk, Gio
 
 
@@ -29,6 +30,11 @@ from .utils import get_category_color
 @Gtk.Template(resource_path="/io/github/lo2dev/Nucleus/window.ui")
 class NucleusWindow(Adw.ApplicationWindow):
     __gtype_name__ = "NucleusWindow"
+
+    stack = Gtk.Template.Child()
+    searchbar = Gtk.Template.Child()
+    search_entry = Gtk.Template.Child()
+    search_listbox = Gtk.Template.Child()
 
     bottom_sheet = Gtk.Template.Child()
     periodic_table = Gtk.Template.Child()
@@ -53,6 +59,27 @@ class NucleusWindow(Adw.ApplicationWindow):
         json_file = json.loads(decoded_text)
 
         for element in json_file["elements"]:
+            row_symbol_center_box = Gtk.CenterBox(
+                width_request=35,
+                halign=Gtk.Align.CENTER,
+            )
+            row_symbol = Gtk.Label(
+                label=element['symbol'],
+                halign=Gtk.Align.CENTER,
+                css_classes=["title-3"]
+            )
+            row = Adw.ActionRow(
+                title=element['name'],
+                subtitle=f"{element['category'].title()} 𐄁 {element['atomic_mass']} u",
+                activatable=True,
+            )
+
+            row_symbol_center_box.set_center_widget(row_symbol)
+            row.add_prefix(row_symbol_center_box)
+            row.connect("activated", self.on_search_row_clicked, element)
+
+            self.search_listbox.append(row)
+
             card = NucleusGridCard(element)
             get_category_color(card, element['category'])
             card.connect("clicked", self.on_grid_card_clicked, element)
@@ -103,9 +130,40 @@ class NucleusWindow(Adw.ApplicationWindow):
             ),
         )
 
+        self.search_listbox.set_filter_func(self.search_filter)
+        self.searchbar.connect_entry(self.search_entry)
+        self.searchbar.connect(
+            "notify::search-mode-enabled",
+            lambda *_: self.stack.set_visible_child_name (
+                "search-view" if self.searchbar.get_search_mode() else "table-view"
+            ),
+        )
 
-    def on_close_sidebar(self, _clicked_button, last_selected_element) -> None:
-        last_selected_element.props.active = False
+        self.search_entry.connect("search-changed", self.on_search_changed)
+
+        self.close_sidebar_button.connect(
+            "clicked",
+            self.on_close_sidebar,
+            self.last_selected_element
+        )
+
+
+    def search_filter(self, row):
+        match = regex.search(
+            self.search_entry.props.text,
+            row.props.title +  row.props.subtitle,
+            regex.IGNORECASE
+        )
+        return match
+
+
+    def on_search_changed(self, _search_widget):
+        self.search_listbox.invalidate_filter()
+
+
+    def on_close_sidebar(self, _clicked_button, last_selected_element=None) -> None:
+        if not last_selected_element == None:
+            last_selected_element.props.active = False
         self.split_view.props.show_sidebar = False
         self.bottom_sheet.props.open = False
 
@@ -113,6 +171,15 @@ class NucleusWindow(Adw.ApplicationWindow):
     def on_bottom_sheet_open_changed(self, x, y):
         if self.bottom_sheet.props.open == False:
             self.on_close_sidebar(None, self.last_selected_element)
+
+
+
+    def on_search_row_clicked(self, row, data):
+        if self.split_view.props.show_sidebar == False:
+                self.split_view.props.show_sidebar = True
+
+        self.bottom_sheet.props.open = True
+        self.load_chem_info(data)
 
 
     def on_grid_card_clicked(self, button, element_data):
@@ -136,12 +203,6 @@ class NucleusWindow(Adw.ApplicationWindow):
                 self.split_view.props.show_sidebar = True
             else:
                 self.split_view.props.show_sidebar = False
-
-        self.close_sidebar_button.connect(
-            "clicked",
-            self.on_close_sidebar,
-            self.last_selected_element
-        )
 
 
     def load_chem_info(self, data) -> None:
