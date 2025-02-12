@@ -19,6 +19,7 @@
 
 import gi, json
 import re as regex
+
 from gi.repository import Adw, Gtk, Gio
 from .utils import get_category_color
 
@@ -93,10 +94,17 @@ class NucleusElementInfo(Gtk.Box):
                 elif property == 'density':
                     row.props.subtitle = f"{data[property]} g/cm<sup>3</sup>"
                 elif property == 'melt' or property == 'boil':
-                    converted_value = float(row.props.subtitle) - 273.15
-                    row.props.subtitle = f"{converted_value:.2f} °C = {row.props.subtitle} K"
+                    row.props.title = f"{row.props.title}s at"
+                    if data[property] is not None:
+                        celcius = float(data[property]) - 273.15
+                        fahrenheit = (celcius * 1.8) + 32
+                        row.props.subtitle = f"{celcius:.2f} °C = {fahrenheit:.2f} °F = {data[property]} K"
                 elif property == 'atomic_mass':
                     row.props.subtitle = f"{data[property]} u"
+                elif property == 'molar_heat':
+                    row.props.title = "Molar Heat Capacity"
+                    if data[property] is not None:
+                        row.props.subtitle = f"{data[property]} J/(mol·K)"
 
                 group.add(row)
 
