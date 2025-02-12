@@ -70,7 +70,7 @@ class NucleusWindow(Adw.ApplicationWindow):
             )
             row = Adw.ActionRow(
                 title=element['name'],
-                subtitle=f"{element['category'].title()} 𐄁 {element['atomic_mass']} u",
+                subtitle=f"{element['category'].title()} ⸱ {element['atomic_mass']} u",
                 activatable=True,
             )
 
