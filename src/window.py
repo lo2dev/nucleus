@@ -143,7 +143,7 @@ class NucleusWindow(Adw.ApplicationWindow):
 
         self.close_sidebar_button.connect(
             "clicked",
-            self.on_close_sidebar,
+            self.close_element_details,
             self.last_selected_element
         )
 
@@ -161,48 +161,44 @@ class NucleusWindow(Adw.ApplicationWindow):
         self.search_listbox.invalidate_filter()
 
 
-    def on_close_sidebar(self, _clicked_button, last_selected_element=None) -> None:
+    def on_search_row_clicked(self, row, data):
+        self.open_element_details(data)
+
+
+    def on_bottom_sheet_open_changed(self, _x, _y):
+        if self.bottom_sheet.props.open == False:
+            self.close_element_details(None, self.last_selected_element)
+
+
+    def close_element_details(self, _clicked_button=None, last_selected_element=None):
         if not last_selected_element == None:
             last_selected_element.props.active = False
+
         self.split_view.props.show_sidebar = False
         self.bottom_sheet.props.open = False
 
 
-    def on_bottom_sheet_open_changed(self, x, y):
-        if self.bottom_sheet.props.open == False:
-            self.on_close_sidebar(None, self.last_selected_element)
-
-
-
-    def on_search_row_clicked(self, row, data):
-        if self.split_view.props.show_sidebar == False:
-                self.split_view.props.show_sidebar = True
-
+    def open_element_details(self, data):
         self.bottom_sheet.props.open = True
+        self.split_view.props.show_sidebar = True
         self.load_chem_info(data)
 
 
-    def on_grid_card_clicked(self, button, element_data):
+    def on_grid_card_clicked(self, button, data):
         if self.last_selected_element == None:
             self.last_selected_element = button
-
-        self.bottom_sheet.props.open = True
 
         if button != self.last_selected_element:
             self.last_selected_element.props.active = False
             self.last_selected_element = button
 
-            if self.split_view.props.show_sidebar == False:
-                self.split_view.props.show_sidebar = True
-
-            self.load_chem_info(element_data)
+            self.open_element_details(data)
 
         elif button == self.last_selected_element:
             if self.split_view.props.show_sidebar == False:
-                self.load_chem_info(element_data)
-                self.split_view.props.show_sidebar = True
+                self.open_element_details(data)
             else:
-                self.split_view.props.show_sidebar = False
+                self.close_element_details(self.last_selected_element)
 
 
     def load_chem_info(self, data) -> None:
