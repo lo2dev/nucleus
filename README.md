@@ -1,3 +1,3 @@
-# Nucleus
+# Project moved to Codeberg
 
-A description of this project.
+https://codeberg.org/lo-vely/nucleus
